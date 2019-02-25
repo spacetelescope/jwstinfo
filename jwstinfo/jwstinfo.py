@@ -74,7 +74,8 @@ def main():
 
     try:
         metadata = read_metadata(sys.argv[1])
-    except (IndexError, ValueError):
+    except (IndexError, ValueError) as err:
+        sys.stderr.write('Error: {}\n'.format(err))
         sys.stderr.write('File does not appear to be JWST data product\n')
         return 1
     except FileNotFoundError:
