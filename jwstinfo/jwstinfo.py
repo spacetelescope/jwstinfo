@@ -7,6 +7,9 @@ import asdf
 asdf.exceptions.AsdfDeprecationWarning = DeprecationWarning
 
 
+__all__ = ['parse_metadata', 'read_metadata']
+
+
 def parse_metadata(asdffile):
 
     metadata = asdffile['meta']
