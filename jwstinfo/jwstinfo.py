@@ -1,4 +1,6 @@
-#!/usr/bin/env python3
+"""
+Module and command line application for summarizing JWST data products
+"""
 import os
 import sys
 from argparse import ArgumentParser
@@ -12,7 +14,19 @@ __all__ = ['parse_metadata', 'read_metadata']
 
 
 def parse_metadata(asdffile):
+    """
+    Extracts JWST metadata fields from an AsdfFile object
 
+    Parameters
+    ----------
+    asdffile : `~asdf.AsdfFile`
+        AsdfFile instance representing the JWST data file to be summarized
+
+    Returns
+    -------
+    dict :
+        `dict` containing JWST metadata fields of interest
+    """
     metadata = asdffile['meta']
     extracted = {
         'original filename':    metadata['filename'],
@@ -28,6 +42,19 @@ def parse_metadata(asdffile):
 
 
 def read_metadata(filename):
+    """
+    Reads JWST data product and extracts metadata fields of interest
+
+    Parameters
+    ----------
+    filename : `str`
+        Path of JWST data file to be summarized
+
+    Returns
+    -------
+    dict :
+        `dict` contaning JWST metadata fields of interest
+    """
     with asdf.open(filename,
                    ignore_unrecognized_tag=True,
                    ignore_missing_extensions=True) as af:
@@ -35,7 +62,9 @@ def read_metadata(filename):
 
 
 def main():
-
+    """
+    Entry point for command line application
+    """
     p = ArgumentParser(description='Summarizes JWST data files')
     p.add_argument('filename', help='Path of JWST data file')
 
