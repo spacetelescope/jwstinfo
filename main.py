@@ -23,7 +23,7 @@ def parse_metadata(asdffile):
     return extracted
 
 
-def get_metadata(filename):
+def read_metadata(filename):
     with asdf.open(filename,
                    ignore_unrecognized_tag=True,
                    ignore_missing_extensions=True) as af:
@@ -40,7 +40,7 @@ def main():
     filename = os.path.abspath(sys.argv[1])
 
     try:
-        metadata = get_metadata(sys.argv[1])
+        metadata = read_metadata(sys.argv[1])
     except (IndexError, ValueError):
         sys.stderr.write('File does not appear to be JWST data product\n')
         return 1
