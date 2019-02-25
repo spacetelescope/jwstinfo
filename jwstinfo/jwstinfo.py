@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import sys
+from argparse import ArgumentParser
 
 import asdf
 # Hack to suppress AsdfDeprecationWarning
@@ -35,12 +36,12 @@ def read_metadata(filename):
 
 def main():
 
-    if len(sys.argv) != 2:
-        script = os.path.basename(sys.argv[0])
-        sys.stderr.write('USAGE: {} <filename>\n'.format(script))
-        return 1
+    p = ArgumentParser(description='Summarizes JWST data files')
+    p.add_argument('filename', help='Path of JWST data file')
 
-    filename = os.path.abspath(sys.argv[1])
+    args = p.parse_args()
+
+    filename = os.path.abspath(args.filename)
 
     try:
         metadata = read_metadata(sys.argv[1])
